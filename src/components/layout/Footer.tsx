@@ -1,18 +1,17 @@
 import { ArrowUp } from "lucide-react";
+import { CopyrightYear } from "@/components/layout/CopyrightYear";
 import { Wordmark } from "@/components/layout/Wordmark";
 import { Container } from "@/components/ui/Container";
 import { site } from "@/lib/site";
 
 export function Footer() {
-  const year = new Date().getFullYear();
-
   return (
     <footer className="mt-auto border-t border-border">
       <Container className="flex flex-col gap-6 py-8 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <Wordmark />
           <p className="mt-2 text-sm text-subtle">
-            © {year} {site.name}
+            © <CopyrightYear /> {site.name}
           </p>
         </div>
         <nav

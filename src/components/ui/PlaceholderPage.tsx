@@ -1,4 +1,5 @@
 import { Container } from "@/components/ui/Container";
+import { PageHeader } from "@/components/ui/PageHeader";
 
 type PlaceholderPageProps = {
   label: string;
@@ -13,13 +14,7 @@ export function PlaceholderPage({
 }: PlaceholderPageProps) {
   return (
     <Container as="section" className="py-16 sm:py-24">
-      <p className="text-xs font-medium uppercase tracking-[0.22em] text-subtle">
-        {label}
-      </p>
-      <h1 className="mt-4 font-semibold tracking-tight text-[length:var(--text-title)]">
-        {title}
-      </h1>
-      <p className="mt-4 max-w-xl text-muted">{description}</p>
+      <PageHeader eyebrow={label} title={title} description={description} />
     </Container>
   );
 }

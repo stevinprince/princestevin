@@ -1,4 +1,11 @@
+import { ArticleCard } from "@/components/articles/ArticleCard";
+import { ExperienceCard } from "@/components/experience/ExperienceCard";
+import { ProjectCard } from "@/components/projects/ProjectCard";
+import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { ContactForm } from "@/components/ui/ContactForm";
 import { Container } from "@/components/ui/Container";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { ToolCard } from "@/components/ui/ToolCard";
 import { articles } from "@/data/articles";
 import { experience } from "@/data/experience";
 import { profile } from "@/data/profile";
@@ -8,34 +15,64 @@ import { toolGroups } from "@/data/tools";
 export default function HomePage() {
   return (
     <Container as="section" className="py-16 sm:py-24">
-      <p className="text-xs font-medium uppercase tracking-[0.22em] text-subtle">
-        {profile.role}
-      </p>
-      <h1 className="mt-6 max-w-4xl font-semibold tracking-tight text-[length:var(--text-display)] leading-[1.05]">
-        {profile.headline}
-      </h1>
-      <p className="mt-8 max-w-2xl text-muted">{profile.bio}</p>
-      <dl className="mt-12 grid max-w-2xl gap-6 border-t border-border pt-8 text-sm sm:grid-cols-2">
-        <div>
-          <dt className="text-subtle">Projects</dt>
-          <dd className="mt-1 text-foreground">{projects.length} placeholder entries</dd>
+      <SectionHeading
+        as="h1"
+        eyebrow="Component preview"
+        title="Shared UI is ready"
+        description="These are the reusable cards, headings, and the contact form. The finished homepage composition lands in the next step."
+      />
+
+      <AnimatedSection className="mt-16">
+        <SectionHeading
+          eyebrow="Projects"
+          title="Project cards"
+          href="/projects"
+          linkLabel="All projects"
+        />
+        <div className="mt-10 grid gap-10 md:grid-cols-2">
+          {projects.slice(0, 2).map((project) => (
+            <ProjectCard key={project.slug} project={project} />
+          ))}
         </div>
-        <div>
-          <dt className="text-subtle">Experience</dt>
-          <dd className="mt-1 text-foreground">
-            {experience.roles.length} roles, {experience.education.length} education
-            item
-          </dd>
+      </AnimatedSection>
+
+      <AnimatedSection className="mt-20">
+        <SectionHeading eyebrow="Experience" title="Experience cards" />
+        <div className="mt-6">
+          {experience.roles[0] ? (
+            <ExperienceCard role={experience.roles[0]} />
+          ) : null}
         </div>
-        <div>
-          <dt className="text-subtle">Tools</dt>
-          <dd className="mt-1 text-foreground">{toolGroups.length} groups</dd>
+      </AnimatedSection>
+
+      <AnimatedSection className="mt-12">
+        <SectionHeading eyebrow="Tools" title="Tool cards" />
+        <div className="mt-6 max-w-xl">
+          {toolGroups[0].items.slice(0, 3).map((tool) => (
+            <ToolCard key={tool.name} tool={tool} />
+          ))}
         </div>
-        <div>
-          <dt className="text-subtle">Thoughts</dt>
-          <dd className="mt-1 text-foreground">{articles.length} sample articles</dd>
+      </AnimatedSection>
+
+      <AnimatedSection className="mt-16">
+        <SectionHeading eyebrow="Thoughts" title="Article cards" />
+        <div className="mt-6">
+          {articles.slice(0, 2).map((article) => (
+            <ArticleCard key={article.slug} article={article} />
+          ))}
         </div>
-      </dl>
+      </AnimatedSection>
+
+      <AnimatedSection className="mt-16" id="contact">
+        <SectionHeading
+          eyebrow="Contact"
+          title={profile.contact.heading}
+          description={profile.contact.body}
+        />
+        <div className="mt-8 max-w-xl">
+          <ContactForm />
+        </div>
+      </AnimatedSection>
     </Container>
   );
 }
