@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { FilterPills } from "@/components/ui/FilterPills";
@@ -16,13 +17,7 @@ type ProjectsPageProps = {
   searchParams: Promise<{ category?: string }>;
 };
 
-export default async function ProjectsPage({ searchParams }: ProjectsPageProps) {
-  const { category } = await searchParams;
-  const categories = getProjectCategories();
-  const visible = category
-    ? projects.filter((project) => project.category === category)
-    : projects;
-
+export default function ProjectsPage({ searchParams }: ProjectsPageProps) {
   return (
     <>
       <Section bordered={false}>
@@ -31,32 +26,56 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
           title="Recent work"
           description="Illustrative project entries for this portfolio. Replace or remove samples in the projects data file."
         />
-        <div className="mt-8">
-          <FilterPills
-            allHref="/projects"
-            active={category}
-            items={categories.map((item) => ({
-              label: item,
-              value: item,
-              href: `/projects?category=${encodeURIComponent(item)}`,
-            }))}
-          />
-        </div>
-        {visible.length > 0 ? (
-          <div className="mt-12 grid gap-x-8 gap-y-12 md:grid-cols-2">
-            {visible.map((project) => (
-              <ProjectCard
-                key={project.slug}
-                project={project}
-                headingLevel="h2"
-              />
-            ))}
-          </div>
-        ) : (
-          <p className="mt-12 text-muted">No projects in this category yet.</p>
-        )}
+        <Suspense fallback={<ProjectListFallback />}>
+          <ProjectList searchParams={searchParams} />
+        </Suspense>
       </Section>
       <ContactSection />
     </>
   );
+}
+
+async function ProjectList({
+  searchParams,
+}: {
+  searchParams: Promise<{ category?: string }>;
+}) {
+  const { category } = await searchParams;
+  const categories = getProjectCategories();
+  const visible = category
+    ? projects.filter((project) => project.category === category)
+    : projects;
+
+  return (
+    <>
+      <div className="mt-8">
+        <FilterPills
+          allHref="/projects"
+          active={category}
+          items={categories.map((item) => ({
+            label: item,
+            value: item,
+            href: `/projects?category=${encodeURIComponent(item)}`,
+          }))}
+        />
+      </div>
+      {visible.length > 0 ? (
+        <div className="mt-12 grid gap-x-8 gap-y-12 md:grid-cols-2">
+          {visible.map((project) => (
+            <ProjectCard
+              key={project.slug}
+              project={project}
+              headingLevel="h2"
+            />
+          ))}
+        </div>
+      ) : (
+        <p className="mt-12 text-muted">No projects in this category yet.</p>
+      )}
+    </>
+  );
+}
+
+function ProjectListFallback() {
+  return <p className="mt-12 text-muted">Loading projects…</p>;
 }

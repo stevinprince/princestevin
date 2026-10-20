@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { ArticleCard } from "@/components/articles/ArticleCard";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { FilterPills } from "@/components/ui/FilterPills";
@@ -16,13 +17,7 @@ type ThoughtsPageProps = {
   searchParams: Promise<{ tag?: string }>;
 };
 
-export default async function ThoughtsPage({ searchParams }: ThoughtsPageProps) {
-  const { tag } = await searchParams;
-  const tags = getArticleTags();
-  const visible = tag
-    ? articles.filter((article) => article.tags.includes(tag))
-    : articles;
-
+export default function ThoughtsPage({ searchParams }: ThoughtsPageProps) {
   return (
     <>
       <Section bordered={false}>
@@ -31,33 +26,57 @@ export default async function ThoughtsPage({ searchParams }: ThoughtsPageProps) 
           title="Writing"
           description="Sample technical notes. They are local placeholders, not published articles. Add a new entry in the articles data file to create a page."
         />
-        <div className="mt-8">
-          <FilterPills
-            allHref="/thoughts"
-            allLabel="All"
-            active={tag}
-            items={tags.map((item) => ({
-              label: item,
-              value: item,
-              href: `/thoughts?tag=${encodeURIComponent(item)}`,
-            }))}
-          />
-        </div>
-        <div className="mt-8">
-          {visible.length > 0 ? (
-            visible.map((article) => (
-              <ArticleCard
-                key={article.slug}
-                article={article}
-                headingLevel="h2"
-              />
-            ))
-          ) : (
-            <p className="text-muted">No articles with this tag yet.</p>
-          )}
-        </div>
+        <Suspense fallback={<ArticleListFallback />}>
+          <ArticleList searchParams={searchParams} />
+        </Suspense>
       </Section>
       <ContactSection />
     </>
   );
+}
+
+async function ArticleList({
+  searchParams,
+}: {
+  searchParams: Promise<{ tag?: string }>;
+}) {
+  const { tag } = await searchParams;
+  const tags = getArticleTags();
+  const visible = tag
+    ? articles.filter((article) => article.tags.includes(tag))
+    : articles;
+
+  return (
+    <>
+      <div className="mt-8">
+        <FilterPills
+          allHref="/thoughts"
+          allLabel="All"
+          active={tag}
+          items={tags.map((item) => ({
+            label: item,
+            value: item,
+            href: `/thoughts?tag=${encodeURIComponent(item)}`,
+          }))}
+        />
+      </div>
+      <div className="mt-8">
+        {visible.length > 0 ? (
+          visible.map((article) => (
+            <ArticleCard
+              key={article.slug}
+              article={article}
+              headingLevel="h2"
+            />
+          ))
+        ) : (
+          <p className="text-muted">No articles with this tag yet.</p>
+        )}
+      </div>
+    </>
+  );
+}
+
+function ArticleListFallback() {
+  return <p className="mt-8 text-muted">Loading articles…</p>;
 }
