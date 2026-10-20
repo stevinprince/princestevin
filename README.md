@@ -1,36 +1,187 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Stevin Prince — Personal Portfolio
 
-## Getting Started
+A static personal website for Stevin Prince, a software engineer focused on backend systems, Go, Python, and cloud-native work. The layout is an original implementation inspired by the editorial rhythm of the Sawad Framer template.
 
-First, run the development server:
+## Stack
+
+- Next.js 16 App Router
+- TypeScript (strict)
+- Tailwind CSS v4
+- Framer Motion
+- Lucide React
+
+There is no database, CMS, or authentication. Content lives in local TypeScript files.
+
+## Local setup
+
+Requires Node.js 20 or later.
 
 ```bash
+npm install
+cp env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Command | Purpose |
+|---|---|
+| `npm run dev` | Development server |
+| `npm run build` | Production build |
+| `npm run start` | Serve the production build |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | TypeScript |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment
 
-## Learn More
+Copy `env.example` to `.env.local`:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Set this to the public domain before deploying. It is used for canonical URLs, Open Graph tags, JSON-LD, `sitemap.xml`, and `robots.txt`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Pages
 
-## Deploy on Vercel
+- `/` — homepage
+- `/projects` — project index, with category filters
+- `/projects/[slug]` — case study
+- `/experience` — work history, education, certifications
+- `/tools` — technology index
+- `/thoughts` — article index, with tag filters
+- `/thoughts/[slug]` — article
+- Custom 404 page
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Replace content
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Edit these files. The UI reads from them and does not hardcode profile copy.
+
+| What to change | File |
+|---|---|
+| Name, role, bio, email, location, photo path, socials, stats, specialties, contact copy | `src/data/profile.ts` |
+| Site URL and navigation | `src/lib/site.ts` |
+| Projects and case studies | `src/data/projects.ts` |
+| Work history, education, certifications | `src/data/experience.ts` |
+| Tool groups and descriptions | `src/data/tools.ts` |
+| Articles | `src/data/articles.ts` |
+| Shared types | `src/data/types.ts` |
+| Colors, spacing, type scale | `src/styles/tokens.css` |
+| Contact form submission | `src/lib/form.ts` |
+
+Header and footer identity fields come from `src/lib/site.ts`, which reads `src/data/profile.ts`. Change the profile once.
+
+### Images
+
+Placeholder SVGs are in `public/images/`:
+
+- `public/images/profile.svg`
+- `public/images/projects/`
+- `public/images/articles/`
+
+Replace a file in place, or put a new image in `public/images/` and update the `src` path in the matching data file. JPEG and PNG work. `next/image` is used for raster files; SVGs render as ordinary images.
+
+Update `alt` text when you change a photo.
+
+### Resume
+
+The resume button is off until a file exists:
+
+1. Add `public/resume.pdf`
+2. Set `resumeEnabled: true` in `src/data/profile.ts`
+3. Change `resumeUrl` if the filename is different
+
+### Projects
+
+Add an object to the `projects` array in `src/data/projects.ts`. Use a unique `slug`. That creates `/projects/[slug]` automatically.
+
+Set `isPlaceholder: false` when the entry is a real public project. Do not invent metrics or confidential implementation details.
+
+### Articles
+
+Add an object to `src/data/articles.ts` with a unique `slug`. The page is generated at `/thoughts/[slug]`.
+
+Write `body` as markdown in the string:
+
+- Paragraphs separated by a blank line
+- `## Heading`
+- `-` lists
+- Fenced code blocks, for example <code>```go</code>
+
+These are sample notes until you publish real writing. Keep `isPlaceholder: true` until then.
+
+There is no CMS. Markdown files are not required; TypeScript data is the source.
+
+### Tools
+
+`src/data/tools.ts` is an ordered list of groups. Add, edit, remove, or reorder groups there. The tools page does not need component changes.
+
+Do not add proficiency percentages.
+
+## Contact form
+
+The form validates name, email, and message in the browser. There is no backend, so it does not show a fake success state.
+
+Default mode is `mailto`. A valid submission opens the visitor's email client with a prefilled message.
+
+To connect Formspree, Getform, Basin, or a custom endpoint:
+
+1. Open `src/lib/form.ts`
+2. Set `mode` to `"endpoint"`
+3. Set `action` to the provider URL
+
+The form posts `name`, `email`, and `message`.
+
+## Design tokens
+
+Change the visual identity in `src/styles/tokens.css`:
+
+- `--background`, `--foreground`, `--muted`, `--subtle`, `--border`, `--accent`
+- `--content-width`, `--header-height`
+- `--text-display`, `--text-title`, `--text-body`
+
+Fonts are Geist and Geist Mono, loaded in `src/app/layout.tsx`.
+
+## Deployment
+
+Any host that supports Next.js works. On Vercel:
+
+1. Push the repository
+2. Import the project
+3. Set `NEXT_PUBLIC_SITE_URL` to the production URL
+4. Deploy
+
+Or build locally:
+
+```bash
+npm run build
+npm run start
+```
+
+## Limitations
+
+- Profile email, GitHub, and LinkedIn URLs are placeholders. Replace them in `src/data/profile.ts`.
+- Projects and articles are illustrative samples.
+- Images are abstract SVG placeholders, not photographs.
+- The resume button stays hidden until you add a PDF and enable it.
+- The contact form uses `mailto` until you set an endpoint in `src/lib/form.ts`.
+- Brand icons for GitHub and LinkedIn are not included because Lucide 1.x no longer ships them. Links are text with a small external-link icon.
+- `NEXT_PUBLIC_SITE_URL` defaults to `http://localhost:3000` if unset.
+
+## Folder structure
+
+```text
+src/
+  app/                  routes, metadata, sitemap, robots
+  components/
+    layout/             header, footer, navigation
+    sections/           homepage sections
+    projects/           project cards and case studies
+    experience/         experience rows
+    articles/           article cards, markdown, detail
+    ui/                 shared primitives
+  data/                 profile, projects, experience, tools, articles
+  lib/                  site config, metadata, form, markdown, utils
+  styles/tokens.css     design tokens
+public/images/          replaceable placeholders
+```
