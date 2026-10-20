@@ -1,7 +1,7 @@
 import {
   Boxes,
   Cloud,
-  Code2,
+  Code,
   Database,
   GitBranch,
   Server,
@@ -16,11 +16,11 @@ type ToolCardProps = {
   className?: string;
 };
 
-const iconByName: Record<string, typeof Code2> = {
-  Go: Code2,
-  Python: Code2,
+const iconByName: Record<string, typeof Code> = {
+  Go: Code,
+  Python: Code,
   SQL: Database,
-  TypeScript: Code2,
+  TypeScript: Code,
   "REST APIs": Workflow,
   gRPC: Workflow,
   Microservices: Boxes,
@@ -41,7 +41,7 @@ const iconByName: Record<string, typeof Code2> = {
 };
 
 export function ToolCard({ tool, className }: ToolCardProps) {
-  const Icon = iconByName[tool.name] ?? Code2;
+  const Icon = iconByName[tool.name] ?? Code;
 
   return (
     <article className={cn("flex gap-4 border-t border-border py-5", className)}>

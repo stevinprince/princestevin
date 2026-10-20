@@ -13,6 +13,7 @@ export const profile: Profile = {
     alt: "Portrait placeholder for Stevin Prince",
   },
   resumeUrl: "/resume.pdf",
+  resumeEnabled: false,
   socials: {
     github: "https://github.com/stevinprince",
     linkedin: "https://www.linkedin.com/in/stevinprince",

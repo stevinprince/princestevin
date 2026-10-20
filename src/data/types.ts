@@ -29,6 +29,7 @@ export type Profile = {
   location: string;
   image: ProfileImage;
   resumeUrl: string;
+  resumeEnabled: boolean;
   socials: SocialLinks;
   stats: StatItem[];
   specialties: string[];

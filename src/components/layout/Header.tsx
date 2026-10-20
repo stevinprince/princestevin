@@ -1,7 +1,7 @@
+import Link from "next/link";
 import { Wordmark } from "@/components/layout/Wordmark";
 import { SiteNav } from "@/components/layout/SiteNav";
 import { Container } from "@/components/ui/Container";
-import { site } from "@/lib/site";
 
 export function Header() {
   return (
@@ -10,12 +10,12 @@ export function Header() {
         <Wordmark />
         <div className="flex items-center gap-8">
           <SiteNav />
-          <a
-            href={`mailto:${site.email}`}
+          <Link
+            href="/#contact"
             className="hidden items-center bg-accent px-3.5 py-2 text-sm text-accent-foreground transition-opacity hover:opacity-80 md:inline-flex"
           >
             Contact
-          </a>
+          </Link>
         </div>
       </Container>
     </header>

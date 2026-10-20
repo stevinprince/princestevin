@@ -4,7 +4,7 @@ import { useEffect, useId, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
-import { navigation, site } from "@/lib/site";
+import { navigation } from "@/lib/site";
 import { cn, isActivePath } from "@/lib/utils";
 
 export function SiteNav() {
@@ -74,13 +74,13 @@ export function SiteNav() {
               {item.label}
             </Link>
           ))}
-          <a
-            href={`mailto:${site.email}`}
+          <Link
+            href="/#contact"
             onClick={() => setOpen(false)}
             className="mt-3 inline-flex min-h-11 items-center justify-center bg-accent px-4 text-sm text-accent-foreground"
           >
             Contact
-          </a>
+          </Link>
         </nav>
       </div>
     </>
