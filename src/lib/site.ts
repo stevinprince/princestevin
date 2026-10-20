@@ -1,15 +1,14 @@
+import { profile } from "@/data/profile";
+
 export const site = {
-  name: "Stevin Prince",
-  role: "Software Engineer",
-  headline: "Building reliable backend systems and cloud-native applications.",
-  email: "hello@stevinprince.dev",
-  location: "Kochi, India",
+  name: profile.name,
+  role: profile.role,
+  headline: profile.headline,
+  email: profile.email,
+  location: profile.location,
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-  resumeUrl: "/resume.pdf",
-  socials: {
-    github: "https://github.com/stevinprince",
-    linkedin: "https://www.linkedin.com/in/stevinprince",
-  },
+  resumeUrl: profile.resumeUrl,
+  socials: profile.socials,
 } as const;
 
 export const navigation = [
