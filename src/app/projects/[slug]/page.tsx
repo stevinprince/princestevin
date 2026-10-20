@@ -1,6 +1,11 @@
 import { notFound } from "next/navigation";
-import { PlaceholderPage } from "@/components/ui/PlaceholderPage";
-import { getProjectBySlug, projects } from "@/data/projects";
+import { ProjectCaseStudy } from "@/components/projects/ProjectCaseStudy";
+import { ContactSection } from "@/components/sections/ContactSection";
+import {
+  getProjectBySlug,
+  getRelatedProjects,
+  projects,
+} from "@/data/projects";
 import { createMetadata } from "@/lib/metadata";
 
 type ProjectParams = {
@@ -26,7 +31,7 @@ export async function generateMetadata({ params }: ProjectParams) {
   });
 }
 
-export default async function ProjectStubPage({ params }: ProjectParams) {
+export default async function ProjectPage({ params }: ProjectParams) {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
 
@@ -35,10 +40,12 @@ export default async function ProjectStubPage({ params }: ProjectParams) {
   }
 
   return (
-    <PlaceholderPage
-      label="Project"
-      title={project.title}
-      description="The full case study template will be implemented in a later step."
-    />
+    <>
+      <ProjectCaseStudy
+        project={project}
+        related={getRelatedProjects(project.slug)}
+      />
+      <ContactSection />
+    </>
   );
 }

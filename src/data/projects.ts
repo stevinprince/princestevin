@@ -238,6 +238,10 @@ export function getFeaturedProjects(): Project[] {
   return projects.filter((project) => project.featured);
 }
 
+export function getProjectCategories(): string[] {
+  return [...new Set(projects.map((project) => project.category))];
+}
+
 export function getRelatedProjects(slug: string): Project[] {
   const project = getProjectBySlug(slug);
 

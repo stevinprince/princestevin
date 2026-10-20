@@ -162,6 +162,10 @@ export function getFeaturedArticles(): Article[] {
   return articles.filter((article) => article.featured);
 }
 
+export function getArticleTags(): string[] {
+  return [...new Set(articles.flatMap((article) => article.tags))];
+}
+
 export function getRelatedArticles(slug: string): Article[] {
   const article = getArticleBySlug(slug);
 

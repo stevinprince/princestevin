@@ -1,6 +1,11 @@
 import { notFound } from "next/navigation";
-import { PlaceholderPage } from "@/components/ui/PlaceholderPage";
-import { articles, getArticleBySlug } from "@/data/articles";
+import { ArticleDetail } from "@/components/articles/ArticleDetail";
+import { ContactSection } from "@/components/sections/ContactSection";
+import {
+  articles,
+  getArticleBySlug,
+  getRelatedArticles,
+} from "@/data/articles";
 import { createMetadata } from "@/lib/metadata";
 
 type ArticleParams = {
@@ -26,7 +31,7 @@ export async function generateMetadata({ params }: ArticleParams) {
   });
 }
 
-export default async function ArticleStubPage({ params }: ArticleParams) {
+export default async function ArticlePage({ params }: ArticleParams) {
   const { slug } = await params;
   const article = getArticleBySlug(slug);
 
@@ -35,10 +40,12 @@ export default async function ArticleStubPage({ params }: ArticleParams) {
   }
 
   return (
-    <PlaceholderPage
-      label="Thoughts"
-      title={article.title}
-      description="The full article template will be implemented in a later step."
-    />
+    <>
+      <ArticleDetail
+        article={article}
+        related={getRelatedArticles(article.slug)}
+      />
+      <ContactSection />
+    </>
   );
 }

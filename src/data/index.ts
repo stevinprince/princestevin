@@ -4,6 +4,7 @@ export { toolGroups } from "@/data/tools";
 export {
   articles,
   getArticleBySlug,
+  getArticleTags,
   getFeaturedArticles,
   getRelatedArticles,
 } from "@/data/articles";
@@ -11,6 +12,7 @@ export {
   projects,
   getFeaturedProjects,
   getProjectBySlug,
+  getProjectCategories,
   getRelatedProjects,
 } from "@/data/projects";
 

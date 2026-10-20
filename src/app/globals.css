@@ -24,6 +24,69 @@ body {
   color: var(--background);
 }
 
+.article-prose > * + * {
+  margin-top: 1.25rem;
+}
+
+.article-prose h2 {
+  margin-top: 2.25rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.article-prose p,
+.article-prose li {
+  color: var(--muted);
+}
+
+.article-prose ul {
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+
+.article-prose li + li {
+  margin-top: 0.4rem;
+}
+
+.article-code {
+  margin-top: 1.5rem;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #1c1b19;
+  color: #f4f3ef;
+}
+
+.article-code figcaption {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.6rem 1rem;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #b8b4a8;
+}
+
+.article-code pre {
+  overflow-x: auto;
+  padding: 1rem;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.token-keyword {
+  color: #d7c7a5;
+}
+
+.token-string {
+  color: #c4d4b8;
+}
+
+.token-comment {
+  color: #8a8984;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
