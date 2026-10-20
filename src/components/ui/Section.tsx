@@ -28,7 +28,7 @@ export function Section({
       id={id}
       className={cn(bordered && "border-t border-border", className)}
     >
-      <Container className="py-20 sm:py-28">{content}</Container>
+      <Container className="py-16 sm:py-20 lg:py-28">{content}</Container>
     </section>
   );
 }

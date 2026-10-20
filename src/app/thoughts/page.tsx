@@ -46,7 +46,11 @@ export default async function ThoughtsPage({ searchParams }: ThoughtsPageProps) 
         <div className="mt-8">
           {visible.length > 0 ? (
             visible.map((article) => (
-              <ArticleCard key={article.slug} article={article} />
+              <ArticleCard
+                key={article.slug}
+                article={article}
+                headingLevel="h2"
+              />
             ))
           ) : (
             <p className="text-muted">No articles with this tag yet.</p>

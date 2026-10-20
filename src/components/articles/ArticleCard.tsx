@@ -6,9 +6,16 @@ import { cn, formatDate } from "@/lib/utils";
 type ArticleCardProps = {
   article: Article;
   className?: string;
+  headingLevel?: "h2" | "h3";
 };
 
-export function ArticleCard({ article, className }: ArticleCardProps) {
+export function ArticleCard({
+  article,
+  className,
+  headingLevel = "h3",
+}: ArticleCardProps) {
+  const Heading = headingLevel;
+
   return (
     <article className={cn("border-t border-border py-8", className)}>
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs uppercase tracking-[0.16em] text-subtle">
@@ -16,11 +23,11 @@ export function ArticleCard({ article, className }: ArticleCardProps) {
         <span>{article.readingTime}</span>
         {article.isPlaceholder ? <span>Sample</span> : null}
       </div>
-      <h3 className="mt-3 text-xl font-semibold tracking-tight">
+      <Heading className="mt-3 text-xl font-semibold tracking-tight">
         <Link href={`/thoughts/${article.slug}`} className="hover:opacity-70">
           {article.title}
         </Link>
-      </h3>
+      </Heading>
       <p className="mt-3 max-w-2xl text-muted">{article.excerpt}</p>
       <div className="mt-4 flex flex-wrap gap-2">
         {article.tags.map((tag) => (

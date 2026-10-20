@@ -6,6 +6,12 @@ html {
   scroll-padding-top: calc(var(--header-height) + 0.75rem);
 }
 
+img,
+svg,
+video {
+  max-width: 100%;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

@@ -13,6 +13,18 @@ export function SiteNav() {
   const menuId = useId();
 
   useEffect(() => {
+    const media = window.matchMedia("(min-width: 768px)");
+    const onChange = () => {
+      if (media.matches) {
+        setOpen(false);
+      }
+    };
+
+    media.addEventListener("change", onChange);
+    return () => media.removeEventListener("change", onChange);
+  }, []);
+
+  useEffect(() => {
     if (!open) {
       return;
     }
@@ -50,7 +62,11 @@ export function SiteNav() {
         aria-label={open ? "Close menu" : "Open menu"}
         onClick={() => setOpen((current) => !current)}
       >
-        {open ? <X size={20} strokeWidth={1.75} /> : <Menu size={20} strokeWidth={1.75} />}
+        {open ? (
+          <X size={20} strokeWidth={1.75} aria-hidden="true" />
+        ) : (
+          <Menu size={20} strokeWidth={1.75} aria-hidden="true" />
+        )}
       </button>
 
       <div
@@ -58,12 +74,15 @@ export function SiteNav() {
         hidden={!open}
         className="absolute inset-x-0 top-full border-b border-border bg-background md:hidden"
       >
-        <nav className="flex flex-col px-5 py-4 sm:px-8" aria-label="Mobile">
+        <nav className="flex flex-col px-4 py-4 sm:px-8" aria-label="Mobile">
           {navigation.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
+              aria-current={
+                isActivePath(pathname, item.href) ? "page" : undefined
+              }
               className={cn(
                 "flex min-h-11 items-center text-base",
                 isActivePath(pathname, item.href)
@@ -101,7 +120,7 @@ function NavLink({ href, pathname, children }: NavLinkProps) {
       href={href}
       aria-current={active ? "page" : undefined}
       className={cn(
-        "text-sm transition-colors",
+        "inline-flex min-h-11 items-center text-sm transition-colors",
         active ? "text-foreground" : "text-muted hover:text-foreground",
       )}
     >

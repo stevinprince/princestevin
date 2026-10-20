@@ -8,18 +8,27 @@ import { cn } from "@/lib/utils";
 type ProjectCardProps = {
   project: Project;
   className?: string;
+  headingLevel?: "h2" | "h3";
 };
 
-export function ProjectCard({ project, className }: ProjectCardProps) {
+export function ProjectCard({
+  project,
+  className,
+  headingLevel = "h3",
+}: ProjectCardProps) {
+  const Heading = headingLevel;
+
   return (
     <article className={cn("group flex flex-col", className)}>
       <Link
         href={`/projects/${project.slug}`}
+        tabIndex={-1}
+        aria-hidden="true"
         className="relative block aspect-[16/10] overflow-hidden bg-border"
       >
         <CoverImage
           src={project.coverImage.src}
-          alt={project.coverImage.alt}
+          alt=""
           className="transition-transform duration-500 ease-out group-hover:scale-[1.03]"
         />
       </Link>
@@ -28,11 +37,11 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
         {project.year ? <span>{project.year}</span> : null}
         {project.isPlaceholder ? <span>Sample</span> : null}
       </div>
-      <h3 className="mt-2 text-xl font-semibold tracking-tight">
+      <Heading className="mt-2 text-xl font-semibold tracking-tight">
         <Link href={`/projects/${project.slug}`} className="hover:opacity-70">
           {project.title}
         </Link>
-      </h3>
+      </Heading>
       <p className="mt-2 text-sm text-muted">{project.description}</p>
       <div className="mt-4 flex flex-wrap gap-2">
         {project.technologies.map((technology) => (

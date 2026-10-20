@@ -11,7 +11,7 @@ type TextLinkProps = {
 
 export function TextLink({ href, children, className, external }: TextLinkProps) {
   const classes = cn(
-    "inline-flex items-center gap-1 text-sm text-foreground underline-offset-4 transition-colors hover:underline",
+    "inline-flex min-h-11 items-center gap-1 text-sm text-foreground underline-offset-4 transition-colors hover:underline",
     className,
   );
 
@@ -26,7 +26,10 @@ export function TextLink({ href, children, className, external }: TextLinkProps)
       >
         {children}
         {href.startsWith("http") ? (
-          <ArrowUpRight size={14} strokeWidth={1.75} aria-hidden="true" />
+          <>
+            <ArrowUpRight size={14} strokeWidth={1.75} aria-hidden="true" />
+            <span className="sr-only"> (opens in a new tab)</span>
+          </>
         ) : null}
       </a>
     );

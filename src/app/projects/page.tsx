@@ -45,7 +45,11 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
         {visible.length > 0 ? (
           <div className="mt-12 grid gap-x-8 gap-y-12 md:grid-cols-2">
             {visible.map((project) => (
-              <ProjectCard key={project.slug} project={project} />
+              <ProjectCard
+                key={project.slug}
+                project={project}
+                headingLevel="h2"
+              />
             ))}
           </div>
         ) : (

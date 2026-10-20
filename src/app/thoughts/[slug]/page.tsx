@@ -28,6 +28,8 @@ export async function generateMetadata({ params }: ArticleParams) {
     title: article.title,
     description: article.excerpt,
     path: `/thoughts/${article.slug}`,
+    type: "article",
+    publishedTime: article.date,
   });
 }
 

@@ -22,27 +22,29 @@ export function Footer() {
             href={site.socials.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="transition-colors hover:text-foreground"
+            className="inline-flex min-h-11 items-center transition-colors hover:text-foreground"
           >
             GitHub
+            <span className="sr-only"> (opens in a new tab)</span>
           </a>
           <a
             href={site.socials.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="transition-colors hover:text-foreground"
+            className="inline-flex min-h-11 items-center transition-colors hover:text-foreground"
           >
             LinkedIn
+            <span className="sr-only"> (opens in a new tab)</span>
           </a>
           <a
             href={`mailto:${site.email}`}
-            className="transition-colors hover:text-foreground"
+            className="inline-flex min-h-11 items-center transition-colors hover:text-foreground"
           >
             Email
           </a>
           <a
             href="#top"
-            className="inline-flex items-center gap-1.5 transition-colors hover:text-foreground"
+            className="inline-flex min-h-11 items-center gap-1.5 transition-colors hover:text-foreground"
           >
             Back to top
             <ArrowUp size={14} strokeWidth={1.75} aria-hidden="true" />

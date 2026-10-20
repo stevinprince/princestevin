@@ -5,12 +5,16 @@ type CreateMetadataInput = {
   title?: string;
   description: string;
   path?: string;
+  type?: "website" | "article";
+  publishedTime?: string;
 };
 
 export function createMetadata({
   title,
   description,
   path = "",
+  type = "website",
+  publishedTime,
 }: CreateMetadataInput): Metadata {
   const fullTitle = title
     ? `${title} — ${site.name}`
@@ -24,13 +28,25 @@ export function createMetadata({
     alternates: {
       canonical: url,
     },
+    authors: [{ name: site.name, url: site.url }],
+    creator: site.name,
     openGraph: {
       title: fullTitle,
       description,
       url,
       siteName: site.name,
       locale: "en_US",
-      type: "website",
+      type,
+      ...(publishedTime ? { publishedTime } : {}),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: fullTitle,
+      description,
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }

@@ -54,6 +54,9 @@ export function SocialLinks({ className, showEmail = true }: SocialLinksProps) {
             >
               <Icon size={16} strokeWidth={1.75} aria-hidden="true" />
               {item.label}
+              {item.external ? (
+                <span className="sr-only"> (opens in a new tab)</span>
+              ) : null}
             </a>
           </li>
         );

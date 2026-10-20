@@ -33,7 +33,10 @@ export function ContactForm() {
     const nextErrors = validateContactForm(values);
     setErrors(nextErrors);
 
-    if (Object.keys(nextErrors).length > 0) {
+    const firstInvalid = Object.keys(nextErrors)[0];
+
+    if (firstInvalid) {
+      document.getElementById(`${formId}-${firstInvalid}`)?.focus();
       return;
     }
 
@@ -131,7 +134,7 @@ export function ContactForm() {
 }
 
 const fieldClassName =
-  "w-full border border-border bg-surface px-3 py-2.5 text-foreground outline-none focus-visible:border-foreground";
+  "min-h-11 w-full border border-border bg-surface px-3 py-2.5 text-foreground focus-visible:border-foreground";
 
 function Field({
   id,

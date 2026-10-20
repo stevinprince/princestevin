@@ -48,8 +48,9 @@ function FilterLink({
   return (
     <Link
       href={href}
+      aria-current={active ? "page" : undefined}
       className={cn(
-        "inline-flex min-h-10 items-center border px-3 text-sm",
+        "inline-flex min-h-11 items-center border px-3 text-sm",
         active
           ? "border-foreground bg-accent text-accent-foreground"
           : "border-border text-muted hover:border-foreground hover:text-foreground",
