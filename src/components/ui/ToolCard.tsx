@@ -44,19 +44,16 @@ export function ToolCard({ tool, className }: ToolCardProps) {
   const Icon = iconByName[tool.name] ?? Code;
 
   return (
-    <article className={cn("flex gap-4 border-t border-border py-5", className)}>
-      <Icon
-        size={20}
-        strokeWidth={1.5}
-        className="mt-0.5 shrink-0 text-foreground"
-        aria-hidden="true"
-      />
+    <div className={cn("flex items-center gap-4", className)}>
+      <div className="flex size-14 shrink-0 items-center justify-center rounded-xl bg-surface-elevated">
+        <Icon size={22} strokeWidth={1.5} aria-hidden="true" className="text-foreground" />
+      </div>
       <div>
-        <h3 className="font-medium tracking-tight">{tool.name}</h3>
+        <h3 className="text-base font-bold tracking-tight">{tool.name}</h3>
         {tool.description ? (
-          <p className="mt-1 text-sm text-muted">{tool.description}</p>
+          <p className="text-sm text-subtle">{tool.description}</p>
         ) : null}
       </div>
-    </article>
+    </div>
   );
 }

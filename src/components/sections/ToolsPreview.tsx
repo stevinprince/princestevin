@@ -1,31 +1,17 @@
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { ToolCard } from "@/components/ui/ToolCard";
 import { toolGroups } from "@/data/tools";
 
 export function ToolsPreview() {
+  const topTools = toolGroups.flatMap((group) => group.items).slice(0, 6);
+
   return (
     <Section>
-      <SectionHeading
-        eyebrow="Stack"
-        title="Tools and technologies"
-        description="Editable profile content. Groupings describe the work I do, not equal proficiency in every tool."
-        href="/tools"
-        linkLabel="View all tools"
-      />
-      <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-        {toolGroups.map((group) => (
-          <div key={group.id}>
-            <h3 className="text-xs font-medium uppercase tracking-[0.18em] text-subtle">
-              {group.title}
-            </h3>
-            <ul className="mt-4 space-y-2">
-              {group.items.map((item) => (
-                <li key={item.name} className="text-lg tracking-tight">
-                  {item.name}
-                </li>
-              ))}
-            </ul>
-          </div>
+      <SectionHeading line1="Premium" line2="Tools" />
+      <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {topTools.map((tool) => (
+          <ToolCard key={tool.name} tool={tool} />
         ))}
       </div>
     </Section>

@@ -1,21 +1,12 @@
-import { ContactForm } from "@/components/ui/ContactForm";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { SocialLinks } from "@/components/ui/SocialLinks";
-import { profile } from "@/data/profile";
+import { ContactForm } from "@/components/ui/ContactForm";
 
 export function ContactSection() {
   return (
     <Section id="contact">
-      <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:items-start">
-        <div>
-          <SectionHeading
-            eyebrow="Contact"
-            title={profile.contact.heading}
-            description={profile.contact.body}
-          />
-          <SocialLinks className="mt-8" />
-        </div>
+      <SectionHeading line1="Let's Work" line2="Together" />
+      <div className="mx-auto mt-14 max-w-2xl">
         <ContactForm />
       </div>
     </Section>

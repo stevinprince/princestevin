@@ -1,7 +1,6 @@
 "use client";
 
 import { useId, useState } from "react";
-import { Button } from "@/components/ui/Button";
 import {
   buildMailtoHref,
   contactFormConfig,
@@ -65,48 +64,45 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="grid gap-5" noValidate>
-      <Field
-        id={`${formId}-name`}
-        label="Name"
-        error={errors.name}
-      >
-        <input
-          id={`${formId}-name`}
-          name="name"
-          autoComplete="name"
-          value={values.name}
-          onChange={(event) => updateField("name", event.target.value)}
-          aria-invalid={Boolean(errors.name)}
-          aria-describedby={errors.name ? `${formId}-name-error` : undefined}
-          className={fieldClassName}
-        />
-      </Field>
-      <Field
-        id={`${formId}-email`}
-        label="Email"
-        error={errors.email}
-      >
-        <input
-          id={`${formId}-email`}
-          name="email"
-          type="email"
-          autoComplete="email"
-          value={values.email}
-          onChange={(event) => updateField("email", event.target.value)}
-          aria-invalid={Boolean(errors.email)}
-          aria-describedby={errors.email ? `${formId}-email-error` : undefined}
-          className={fieldClassName}
-        />
-      </Field>
-      <Field
-        id={`${formId}-message`}
-        label="Message"
-        error={errors.message}
-      >
+      <div className="grid gap-5 sm:grid-cols-2">
+        <Field id={`${formId}-name`} label="Name" error={errors.name}>
+          <input
+            id={`${formId}-name`}
+            name="name"
+            autoComplete="name"
+            placeholder="Your Name"
+            value={values.name}
+            onChange={(event) => updateField("name", event.target.value)}
+            aria-invalid={Boolean(errors.name)}
+            aria-describedby={
+              errors.name ? `${formId}-name-error` : undefined
+            }
+            className={fieldClassName}
+          />
+        </Field>
+        <Field id={`${formId}-email`} label="Email" error={errors.email}>
+          <input
+            id={`${formId}-email`}
+            name="email"
+            type="email"
+            autoComplete="email"
+            placeholder="Your@email.com"
+            value={values.email}
+            onChange={(event) => updateField("email", event.target.value)}
+            aria-invalid={Boolean(errors.email)}
+            aria-describedby={
+              errors.email ? `${formId}-email-error` : undefined
+            }
+            className={fieldClassName}
+          />
+        </Field>
+      </div>
+      <Field id={`${formId}-message`} label="Message" error={errors.message}>
         <textarea
           id={`${formId}-message`}
           name="message"
-          rows={6}
+          rows={5}
+          placeholder="Message"
           value={values.message}
           onChange={(event) => updateField("message", event.target.value)}
           aria-invalid={Boolean(errors.message)}
@@ -117,24 +113,22 @@ export function ContactForm() {
         />
       </Field>
       {submitError ? (
-        <p className="text-sm text-foreground" role="alert">
+        <p className="text-sm text-accent" role="alert">
           {submitError}
         </p>
-      ) : (
-        <p className="text-sm text-subtle">
-          Messages open in your email client until a form provider is connected
-          in <code className="font-mono text-xs">src/lib/form.ts</code>.
-        </p>
-      )}
-      <div>
-        <Button type="submit">Send message</Button>
-      </div>
+      ) : null}
+      <button
+        type="submit"
+        className="min-h-12 w-full rounded-lg bg-accent text-base font-semibold text-accent-foreground transition-opacity hover:opacity-90"
+      >
+        Submit
+      </button>
     </form>
   );
 }
 
 const fieldClassName =
-  "min-h-11 w-full border border-border bg-surface px-3 py-2.5 text-foreground focus-visible:border-foreground";
+  "min-h-12 w-full rounded-lg border border-border bg-surface-elevated px-4 py-3 text-foreground placeholder:text-subtle focus-visible:border-accent";
 
 function Field({
   id,
@@ -149,12 +143,12 @@ function Field({
 }) {
   return (
     <div className="grid gap-2">
-      <label htmlFor={id} className="text-sm font-medium">
+      <label htmlFor={id} className="text-sm text-muted">
         {label}
       </label>
       {children}
       {error ? (
-        <p id={`${id}-error`} className="text-sm text-foreground" role="alert">
+        <p id={`${id}-error`} className="text-sm text-accent" role="alert">
           {error}
         </p>
       ) : null}

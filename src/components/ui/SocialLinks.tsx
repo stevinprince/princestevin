@@ -12,9 +12,14 @@ type SocialLink = {
 type SocialLinksProps = {
   className?: string;
   showEmail?: boolean;
+  variant?: "default" | "card";
 };
 
-export function SocialLinks({ className, showEmail = true }: SocialLinksProps) {
+export function SocialLinks({
+  className,
+  showEmail = true,
+  variant = "default",
+}: SocialLinksProps) {
   const links: SocialLink[] = [
     {
       href: profile.socials.github,
@@ -39,7 +44,12 @@ export function SocialLinks({ className, showEmail = true }: SocialLinksProps) {
   }
 
   return (
-    <ul className={cn("flex flex-wrap items-center gap-x-5 gap-y-3", className)}>
+    <ul
+      className={cn(
+        "flex flex-wrap items-center gap-x-5 gap-y-3",
+        className,
+      )}
+    >
       {links.map((item) => {
         const Icon = item.icon;
 
@@ -47,7 +57,12 @@ export function SocialLinks({ className, showEmail = true }: SocialLinksProps) {
           <li key={item.href}>
             <a
               href={item.href}
-              className="inline-flex min-h-11 items-center gap-2 text-sm text-muted transition-colors hover:text-foreground"
+              className={cn(
+                "inline-flex min-h-11 items-center gap-2 text-sm transition-colors",
+                variant === "card"
+                  ? "text-card-muted hover:text-card-fg"
+                  : "text-muted hover:text-foreground",
+              )}
               {...(item.external
                 ? { target: "_blank", rel: "noopener noreferrer" }
                 : {})}

@@ -26,7 +26,7 @@ body {
 }
 
 ::selection {
-  background: var(--foreground);
+  background: var(--accent);
   color: var(--background);
 }
 
@@ -39,6 +39,7 @@ body {
   font-size: 1.35rem;
   font-weight: 600;
   letter-spacing: -0.02em;
+  color: var(--foreground);
 }
 
 .article-prose p,
@@ -59,7 +60,8 @@ body {
   margin-top: 1.5rem;
   overflow: hidden;
   border: 1px solid var(--border);
-  background: #1c1b19;
+  border-radius: var(--radius-md);
+  background: #0d0d0d;
   color: #f4f3ef;
 }
 
@@ -70,7 +72,7 @@ body {
   font-size: 0.72rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #b8b4a8;
+  color: #888;
 }
 
 .article-code pre {
@@ -90,7 +92,14 @@ body {
 }
 
 .token-comment {
-  color: #8a8984;
+  color: #666;
+}
+
+/* Two-tone section heading: first line bold white, second line outlined */
+.heading-outline {
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.25);
+  color: transparent;
+  font-style: italic;
 }
 
 @media (prefers-reduced-motion: reduce) {

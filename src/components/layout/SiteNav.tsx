@@ -3,9 +3,25 @@
 import { useEffect, useId, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import {
+  Building2,
+  FileText,
+  Home,
+  Menu,
+  PenSquare,
+  Wrench,
+  X,
+} from "lucide-react";
 import { navigation } from "@/lib/site";
 import { cn, isActivePath } from "@/lib/utils";
+
+const iconMap = {
+  Home,
+  FileText,
+  Building2,
+  Wrench,
+  PenSquare,
+} as const;
 
 export function SiteNav() {
   const pathname = usePathname();
@@ -46,17 +62,38 @@ export function SiteNav() {
 
   return (
     <>
-      <nav className="hidden items-center gap-7 md:flex" aria-label="Primary">
-        {navigation.map((item) => (
-          <NavLink key={item.href} href={item.href} pathname={pathname}>
-            {item.label}
-          </NavLink>
-        ))}
+      {/* Desktop: icon-only pill bar */}
+      <nav
+        className="hidden items-center gap-1 rounded-full border border-border bg-surface/80 px-2 py-1.5 backdrop-blur-md md:flex"
+        aria-label="Primary"
+      >
+        {navigation.map((item) => {
+          const Icon = iconMap[item.icon as keyof typeof iconMap];
+          const active = isActivePath(pathname, item.href);
+
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              aria-current={active ? "page" : undefined}
+              aria-label={item.label}
+              className={cn(
+                "flex size-10 items-center justify-center rounded-full transition-colors",
+                active
+                  ? "bg-surface-elevated text-foreground"
+                  : "text-subtle hover:text-foreground",
+              )}
+            >
+              <Icon size={18} strokeWidth={1.5} aria-hidden="true" />
+            </Link>
+          );
+        })}
       </nav>
 
+      {/* Mobile hamburger */}
       <button
         type="button"
-        className="inline-flex size-11 items-center justify-center text-foreground md:hidden"
+        className="inline-flex size-11 items-center justify-center rounded-full border border-border bg-surface/80 text-foreground backdrop-blur-md md:hidden"
         aria-expanded={open}
         aria-controls={menuId}
         aria-label={open ? "Close menu" : "Open menu"}
@@ -69,62 +106,40 @@ export function SiteNav() {
         )}
       </button>
 
+      {/* Mobile menu */}
       <div
         id={menuId}
         hidden={!open}
-        className="absolute inset-x-0 top-full border-b border-border bg-background md:hidden"
+        className="fixed inset-x-0 top-[var(--header-height)] bottom-0 z-40 bg-background/95 backdrop-blur-md md:hidden"
       >
-        <nav className="flex flex-col px-4 py-4 sm:px-8" aria-label="Mobile">
-          {navigation.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={() => setOpen(false)}
-              aria-current={
-                isActivePath(pathname, item.href) ? "page" : undefined
-              }
-              className={cn(
-                "flex min-h-11 items-center text-base",
-                isActivePath(pathname, item.href)
-                  ? "font-medium text-foreground"
-                  : "text-muted",
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
-          <Link
-            href="/#contact"
-            onClick={() => setOpen(false)}
-            className="mt-3 inline-flex min-h-11 items-center justify-center bg-accent px-4 text-sm text-accent-foreground"
-          >
-            Contact
-          </Link>
+        <nav
+          className="flex flex-col gap-1 px-6 py-6"
+          aria-label="Mobile"
+        >
+          {navigation.map((item) => {
+            const Icon = iconMap[item.icon as keyof typeof iconMap];
+            const active = isActivePath(pathname, item.href);
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                aria-current={active ? "page" : undefined}
+                className={cn(
+                  "flex min-h-12 items-center gap-3 rounded-lg px-4 text-base transition-colors",
+                  active
+                    ? "bg-surface-elevated font-medium text-foreground"
+                    : "text-muted hover:text-foreground",
+                )}
+              >
+                <Icon size={18} strokeWidth={1.5} aria-hidden="true" />
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
       </div>
     </>
-  );
-}
-
-type NavLinkProps = {
-  href: string;
-  pathname: string;
-  children: React.ReactNode;
-};
-
-function NavLink({ href, pathname, children }: NavLinkProps) {
-  const active = isActivePath(pathname, href);
-
-  return (
-    <Link
-      href={href}
-      aria-current={active ? "page" : undefined}
-      className={cn(
-        "inline-flex min-h-11 items-center text-sm transition-colors",
-        active ? "text-foreground" : "text-muted hover:text-foreground",
-      )}
-    >
-      {children}
-    </Link>
   );
 }

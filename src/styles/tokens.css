@@ -1,43 +1,64 @@
-/* Centralized visual identity. Change these values to restyle the site. */
+/* Centralized visual identity — dark editorial theme inspired by Sawad */
 
 :root {
   /* Surfaces */
-  --background: #f4f3ef;
-  --surface: #ffffff;
-  --foreground: #141414;
-  --muted: #5c5b57;
-  --subtle: #8a8984;
-  --border: #d8d6ce;
-  --accent: #141414;
-  --accent-foreground: #f4f3ef;
-  --focus-ring: #141414;
+  --background: #111111;
+  --surface: #1a1a1a;
+  --surface-elevated: #222222;
+  --foreground: #ffffff;
+  --muted: #999999;
+  --subtle: #666666;
+  --border: #2a2a2a;
+  --accent: #e8734a;
+  --accent-foreground: #ffffff;
+  --focus-ring: #e8734a;
+
+  /* Card */
+  --card-bg: #f5f0eb;
+  --card-fg: #141414;
+  --card-muted: #666666;
+
+  /* Specialty colors */
+  --color-orange: #e8734a;
+  --color-lime: #c8e64a;
 
   /* Layout */
-  --content-width: 68rem;
-  --header-height: 4.25rem;
+  --content-width: 56rem;
+  --header-height: 4rem;
 
-  /* Radii — keep small for an editorial feel */
-  --radius-sm: 0.125rem;
-  --radius-md: 0.25rem;
+  /* Radii */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+  --radius-full: 9999px;
 
   /* Type scale */
-  --text-display: clamp(2.25rem, 6vw, 4.5rem);
-  --text-title: clamp(1.75rem, 3.5vw, 2.75rem);
-  --text-body: 1.0625rem;
+  --text-display: clamp(3rem, 8vw, 6rem);
+  --text-title: clamp(2rem, 5vw, 4rem);
+  --text-section: clamp(1.25rem, 2.5vw, 1.75rem);
+  --text-body: 1rem;
   --leading-body: 1.7;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-subtle: var(--subtle);
   --color-border: var(--border);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-card-bg: var(--card-bg);
+  --color-card-fg: var(--card-fg);
+  --color-card-muted: var(--card-muted);
+  --color-orange: var(--color-orange);
+  --color-lime: var(--color-lime);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-full: var(--radius-full);
 }

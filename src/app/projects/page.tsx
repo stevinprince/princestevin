@@ -20,10 +20,10 @@ type ProjectsPageProps = {
 export default function ProjectsPage({ searchParams }: ProjectsPageProps) {
   return (
     <>
-      <Section bordered={false}>
+      <Section bordered={false} className="pt-24">
         <PageHeader
           eyebrow="Projects"
-          title="Recent work"
+          title="Recent Work"
           description="Illustrative project entries for this portfolio. Replace or remove samples in the projects data file."
         />
         <Suspense fallback={<ProjectListFallback />}>
@@ -60,7 +60,7 @@ async function ProjectList({
         />
       </div>
       {visible.length > 0 ? (
-        <div className="mt-12 grid gap-x-8 gap-y-12 md:grid-cols-2">
+        <div className="mt-12 space-y-4">
           {visible.map((project) => (
             <ProjectCard
               key={project.slug}

@@ -15,11 +15,11 @@ export const metadata = createMetadata({
 export default function ToolsPage() {
   return (
     <>
-      <Section bordered={false}>
+      <Section bordered={false} className="pt-24">
         <PageHeader
           eyebrow="Tools"
           title="Technologies"
-          description="A data-driven index of languages and tools I use. Add, edit, or reorder groups in the tools data file. These are not proficiency scores."
+          description="A data-driven index of languages and tools I use."
         />
         <div className="mt-14 grid gap-12 lg:grid-cols-2">
           {toolGroups.map((group) => (
@@ -27,7 +27,7 @@ export default function ToolsPage() {
               <h2 className="text-xs font-medium uppercase tracking-[0.18em] text-subtle">
                 {group.title}
               </h2>
-              <div className="mt-4">
+              <div className="mt-5 space-y-5">
                 {group.items.map((tool) => (
                   <ToolCard key={tool.name} tool={tool} />
                 ))}

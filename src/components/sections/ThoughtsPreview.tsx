@@ -4,18 +4,12 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { getFeaturedArticles } from "@/data/articles";
 
 export function ThoughtsPreview() {
-  const articles = getFeaturedArticles();
+  const articles = getFeaturedArticles().slice(0, 3);
 
   return (
     <Section>
-      <SectionHeading
-        eyebrow="Writing"
-        title="Thoughts"
-        description="Sample articles for the reading list. They are not published posts."
-        href="/thoughts"
-        linkLabel="View all articles"
-      />
-      <div className="mt-8">
+      <SectionHeading line1="Design" line2="Thoughts" />
+      <div className="mt-14">
         {articles.map((article) => (
           <ArticleCard key={article.slug} article={article} />
         ))}

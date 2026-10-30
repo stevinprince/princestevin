@@ -12,11 +12,11 @@ export const site = {
 } as const;
 
 export const navigation = [
-  { href: "/", label: "Home" },
-  { href: "/projects", label: "Projects" },
-  { href: "/experience", label: "Experience" },
-  { href: "/tools", label: "Tools" },
-  { href: "/thoughts", label: "Thoughts" },
+  { href: "/", label: "Home", icon: "Home" },
+  { href: "/projects", label: "Projects", icon: "FileText" },
+  { href: "/experience", label: "Experience", icon: "Building2" },
+  { href: "/tools", label: "Tools", icon: "Wrench" },
+  { href: "/thoughts", label: "Thoughts", icon: "PenSquare" },
 ] as const;
 
 export type NavItem = (typeof navigation)[number];

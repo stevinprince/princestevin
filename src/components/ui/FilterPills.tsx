@@ -19,7 +19,7 @@ export function FilterPills({
   items,
 }: FilterPillsProps) {
   return (
-    <nav aria-label="Filters" className="flex flex-wrap gap-2">
+    <nav aria-label="Filters" className="flex flex-wrap justify-center gap-2">
       <FilterLink href={allHref} active={!active}>
         {allLabel}
       </FilterLink>
@@ -50,10 +50,10 @@ function FilterLink({
       href={href}
       aria-current={active ? "page" : undefined}
       className={cn(
-        "inline-flex min-h-11 items-center border px-3 text-sm",
+        "inline-flex min-h-10 items-center rounded-full border px-4 text-sm transition-colors",
         active
-          ? "border-foreground bg-accent text-accent-foreground"
-          : "border-border text-muted hover:border-foreground hover:text-foreground",
+          ? "border-accent bg-accent text-accent-foreground"
+          : "border-border text-muted hover:border-subtle hover:text-foreground",
       )}
     >
       {children}

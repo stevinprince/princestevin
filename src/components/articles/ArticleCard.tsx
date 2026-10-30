@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Badge } from "@/components/ui/Badge";
+import { ArrowUpRight } from "lucide-react";
 import type { Article } from "@/data/types";
 import { cn, formatDate } from "@/lib/utils";
 
@@ -17,23 +17,28 @@ export function ArticleCard({
   const Heading = headingLevel;
 
   return (
-    <article className={cn("border-t border-border py-8", className)}>
-      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs uppercase tracking-[0.16em] text-subtle">
-        <time dateTime={article.date}>{formatDate(article.date)}</time>
-        <span>{article.readingTime}</span>
-        {article.isPlaceholder ? <span>Sample</span> : null}
-      </div>
-      <Heading className="mt-3 text-xl font-semibold tracking-tight">
-        <Link href={`/thoughts/${article.slug}`} className="hover:opacity-70">
+    <Link
+      href={`/thoughts/${article.slug}`}
+      className={cn(
+        "group flex items-start gap-4 border-t border-border py-6 transition-colors hover:bg-surface",
+        className,
+      )}
+    >
+      <div className="flex-1">
+        <Heading className="text-lg font-bold tracking-tight">
           {article.title}
-        </Link>
-      </Heading>
-      <p className="mt-3 max-w-2xl text-muted">{article.excerpt}</p>
-      <div className="mt-4 flex flex-wrap gap-2">
-        {article.tags.map((tag) => (
-          <Badge key={tag}>{tag}</Badge>
-        ))}
+        </Heading>
+        <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted">
+          {article.excerpt}
+        </p>
+        <div className="mt-3 flex items-center gap-6 text-sm text-subtle">
+          <time dateTime={article.date}>{formatDate(article.date)}</time>
+          <span>{article.readingTime}</span>
+        </div>
       </div>
-    </article>
+      <div className="shrink-0 pt-1 text-subtle transition-colors group-hover:text-accent">
+        <ArrowUpRight size={18} strokeWidth={1.5} aria-hidden="true" />
+      </div>
+    </Link>
   );
 }

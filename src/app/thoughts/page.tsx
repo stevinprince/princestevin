@@ -20,11 +20,11 @@ type ThoughtsPageProps = {
 export default function ThoughtsPage({ searchParams }: ThoughtsPageProps) {
   return (
     <>
-      <Section bordered={false}>
+      <Section bordered={false} className="pt-24">
         <PageHeader
           eyebrow="Thoughts"
           title="Writing"
-          description="Sample technical notes. They are local placeholders, not published articles. Add a new entry in the articles data file to create a page."
+          description="Sample technical notes. They are local placeholders, not published articles."
         />
         <Suspense fallback={<ArticleListFallback />}>
           <ArticleList searchParams={searchParams} />
