@@ -9,7 +9,7 @@ export function Footer() {
       <Container className="py-8 text-center text-sm text-subtle">
         <p>
           © <Suspense fallback="2026"><CopyrightYear /></Suspense>{" "}
-          {site.name} | Built with Next.js
+          {site.name}
         </p>
       </Container>
     </footer>

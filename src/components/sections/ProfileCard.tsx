@@ -62,7 +62,7 @@ export function ProfileCard() {
         </div>
 
         {/* Headline */}
-        <p className="mt-3 text-sm leading-relaxed text-card-muted sm:mt-4">
+        <p className="mt-3 text-base leading-relaxed text-card-muted sm:mt-4 sm:text-[17px]">
           {profile.headline}
         </p>
 
@@ -79,7 +79,7 @@ export function ProfileCard() {
                   aria-label={`${item.label} (opens in a new tab)`}
                   className="inline-flex size-10 items-center justify-center text-accent transition-opacity hover:opacity-70"
                 >
-                  <Icon className="size-5" />
+                  <Icon className="size-6" />
                 </a>
               </li>
             );

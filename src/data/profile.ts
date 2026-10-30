@@ -9,7 +9,7 @@ export const profile: Profile = {
   email: "hello@stevinprince.dev",
   location: "Kochi, India",
   image: {
-    src: "/images/profile.svg",
+    src: "/images/profile.jpg",
     alt: "Portrait placeholder for Stevin Prince",
   },
   resumeUrl: "/resume.pdf",

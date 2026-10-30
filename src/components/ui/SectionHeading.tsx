@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 type SectionHeadingProps = {
   /** First line — rendered bold white */
   line1: string;
-  /** Second line — rendered outlined/faded italic */
+  /** Second line — rendered outlined/faded */
   line2: string;
   as?: "h1" | "h2";
   centered?: boolean;
