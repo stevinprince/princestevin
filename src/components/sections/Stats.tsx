@@ -1,4 +1,4 @@
-import { Section } from "@/components/ui/Section";
+import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { StatValue } from "@/components/ui/StatValue";
 import { profile } from "@/data/profile";
 
@@ -6,19 +6,19 @@ export function Stats() {
   const displayStats = profile.stats.slice(0, 3);
 
   return (
-    <Section>
-      <dl className="flex flex-wrap items-start justify-center gap-12 sm:gap-16 lg:gap-24">
+    <AnimatedSection>
+      <dl className="flex flex-wrap items-start gap-8 sm:gap-12">
         {displayStats.map((stat) => (
-          <div key={stat.id} className="text-center">
-            <dd className="text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
+          <div key={stat.id}>
+            <dd className="text-4xl font-extrabold tracking-tight sm:text-5xl">
               <StatValue value={stat.value} />
             </dd>
-            <dt className="mt-2 text-xs uppercase tracking-[0.2em] text-subtle">
-              {stat.label.split(" ").slice(0, 3).join(" ")}
+            <dt className="mt-1 text-[10px] uppercase tracking-[0.2em] text-subtle">
+              {stat.label.split(" ").slice(0, 3).join("\n")}
             </dt>
           </div>
         ))}
       </dl>
-    </Section>
+    </AnimatedSection>
   );
 }

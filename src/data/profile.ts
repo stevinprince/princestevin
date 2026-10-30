@@ -17,6 +17,7 @@ export const profile: Profile = {
   socials: {
     github: "https://github.com/stevinprince",
     linkedin: "https://www.linkedin.com/in/stevinprince",
+    twitter: "https://x.com/stevinprince",
   },
   stats: [
     {

@@ -16,7 +16,7 @@ type ArticleDetailProps = {
 export function ArticleDetail({ article, related }: ArticleDetailProps) {
   return (
     <>
-      <Section bordered={false} className="pt-24">
+      <Section bordered={false} className="pt-28">
         <p className="text-center text-xs font-medium uppercase tracking-[0.22em] text-subtle">
           <TextLink
             href="/thoughts"

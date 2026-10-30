@@ -15,7 +15,7 @@ export const metadata = createMetadata({
 export default function ToolsPage() {
   return (
     <>
-      <Section bordered={false} className="pt-24">
+      <Section bordered={false} className="pt-28">
         <PageHeader
           eyebrow="Tools"
           title="Technologies"
@@ -36,7 +36,7 @@ export default function ToolsPage() {
           ))}
         </div>
       </Section>
-      <ContactSection />
+      <ContactSection fullWidth />
     </>
   );
 }

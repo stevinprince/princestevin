@@ -6,6 +6,7 @@ type SectionHeadingProps = {
   /** Second line — rendered outlined/faded italic */
   line2: string;
   as?: "h1" | "h2";
+  centered?: boolean;
   className?: string;
 };
 
@@ -13,12 +14,14 @@ export function SectionHeading({
   line1,
   line2,
   as: Heading = "h2",
+  centered = false,
   className,
 }: SectionHeadingProps) {
   return (
     <Heading
       className={cn(
-        "text-center font-extrabold uppercase tracking-tight text-[length:var(--text-title)] leading-[0.9]",
+        "font-extrabold uppercase tracking-tight text-[length:var(--text-title)] leading-[0.9]",
+        centered && "text-center",
         className,
       )}
     >

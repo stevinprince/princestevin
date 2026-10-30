@@ -20,7 +20,7 @@ type ProjectsPageProps = {
 export default function ProjectsPage({ searchParams }: ProjectsPageProps) {
   return (
     <>
-      <Section bordered={false} className="pt-24">
+      <Section bordered={false} className="pt-28">
         <PageHeader
           eyebrow="Projects"
           title="Recent Work"
@@ -30,7 +30,7 @@ export default function ProjectsPage({ searchParams }: ProjectsPageProps) {
           <ProjectList searchParams={searchParams} />
         </Suspense>
       </Section>
-      <ContactSection />
+      <ContactSection fullWidth />
     </>
   );
 }

@@ -14,7 +14,7 @@ type ProjectCaseStudyProps = {
 export function ProjectCaseStudy({ project, related }: ProjectCaseStudyProps) {
   return (
     <>
-      <Section bordered={false} className="pt-24">
+      <Section bordered={false} className="pt-28">
         <p className="text-center text-xs font-medium uppercase tracking-[0.22em] text-subtle">
           <TextLink
             href="/projects"

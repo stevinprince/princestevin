@@ -20,7 +20,7 @@ type ThoughtsPageProps = {
 export default function ThoughtsPage({ searchParams }: ThoughtsPageProps) {
   return (
     <>
-      <Section bordered={false} className="pt-24">
+      <Section bordered={false} className="pt-28">
         <PageHeader
           eyebrow="Thoughts"
           title="Writing"
@@ -30,7 +30,7 @@ export default function ThoughtsPage({ searchParams }: ThoughtsPageProps) {
           <ArticleList searchParams={searchParams} />
         </Suspense>
       </Section>
-      <ContactSection />
+      <ContactSection fullWidth />
     </>
   );
 }

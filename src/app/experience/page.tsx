@@ -15,7 +15,7 @@ export const metadata = createMetadata({
 export default function ExperiencePage() {
   return (
     <>
-      <Section bordered={false} className="pt-24">
+      <Section bordered={false} className="pt-28">
         <PageHeader
           eyebrow="Experience"
           title="Professional History"
@@ -29,7 +29,7 @@ export default function ExperiencePage() {
       </Section>
 
       <Section>
-        <SectionHeading line1="Education" line2="& Degrees" />
+        <SectionHeading line1="Education" line2="& Degrees" centered />
         <div className="mt-10">
           {experience.education.map((item) => (
             <article
@@ -52,7 +52,7 @@ export default function ExperiencePage() {
       </Section>
 
       <Section>
-        <SectionHeading line1="Certifications" line2="& Learning" />
+        <SectionHeading line1="Certifications" line2="& Learning" centered />
         <ul className="mt-10 border-t border-border">
           {experience.certifications.map((item) => (
             <li
@@ -65,7 +65,7 @@ export default function ExperiencePage() {
         </ul>
       </Section>
 
-      <ContactSection />
+      <ContactSection fullWidth />
     </>
   );
 }

@@ -47,7 +47,7 @@ export default async function ArticlePage({ params }: ArticleParams) {
         article={article}
         related={getRelatedArticles(article.slug)}
       />
-      <ContactSection />
+      <ContactSection fullWidth />
     </>
   );
 }

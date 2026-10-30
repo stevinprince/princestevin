@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import { Section } from "@/components/ui/Section";
+import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { profile } from "@/data/profile";
 
 export function Specialties() {
@@ -8,25 +8,25 @@ export function Specialties() {
   const right = profile.specialties.slice(mid);
 
   return (
-    <Section>
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div className="relative overflow-hidden rounded-2xl bg-orange p-8 text-background sm:p-10">
-          <p className="text-lg font-bold uppercase tracking-tight sm:text-xl lg:text-2xl">
+    <AnimatedSection>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div className="relative overflow-hidden rounded-2xl bg-orange p-6 text-background sm:p-8">
+          <p className="text-base font-bold uppercase tracking-tight sm:text-lg">
             {left.join(", ")}
           </p>
-          <div className="mt-6 flex size-10 items-center justify-center rounded-full border border-background/30">
-            <ArrowRight size={18} aria-hidden="true" />
+          <div className="mt-5 flex size-9 items-center justify-center rounded-full border border-background/30">
+            <ArrowRight size={16} aria-hidden="true" />
           </div>
         </div>
-        <div className="relative overflow-hidden rounded-2xl bg-lime p-8 text-background sm:p-10">
-          <p className="text-lg font-bold uppercase tracking-tight sm:text-xl lg:text-2xl">
+        <div className="relative overflow-hidden rounded-2xl bg-lime p-6 text-background sm:p-8">
+          <p className="text-base font-bold uppercase tracking-tight sm:text-lg">
             {right.join(", ")}
           </p>
-          <div className="mt-6 flex size-10 items-center justify-center rounded-full border border-background/30">
-            <ArrowRight size={18} aria-hidden="true" />
+          <div className="mt-5 flex size-9 items-center justify-center rounded-full border border-background/30">
+            <ArrowRight size={16} aria-hidden="true" />
           </div>
         </div>
       </div>
-    </Section>
+    </AnimatedSection>
   );
 }

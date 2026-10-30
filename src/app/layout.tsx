@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { JsonLd } from "@/components/layout/JsonLd";
+import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { SkipLink } from "@/components/layout/SkipLink";
 import { profile } from "@/data/profile";
 import { createMetadata } from "@/lib/metadata";
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full flex-col overflow-x-clip bg-background text-foreground">
         <JsonLd />
         <SkipLink />
+        <ScrollToTop />
         <Header />
         <main id="main-content" className="flex-1">
           {children}

@@ -45,7 +45,7 @@ export default async function ProjectPage({ params }: ProjectParams) {
         project={project}
         related={getRelatedProjects(project.slug)}
       />
-      <ContactSection />
+      <ContactSection fullWidth />
     </>
   );
 }
